@@ -4,6 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import player.data.httpclient.HttpClientUtil;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -81,8 +82,16 @@ public class Census {
 
 
         System.out.println(h3List.size());
+//        for (Map.Entry<String, String> e : header3.entrySet()) {
+//            System.out.println(e.getKey() + ",    " + e.getValue());
+//        }
+        HttpClientUtil httpUtil = HttpClientUtil.getInstance();
+
+        ///下载文件
         for (Map.Entry<String, String> e : header3.entrySet()) {
-            System.out.println(e.getKey() + ",    " + e.getValue());
+            String fileUrl = "http://www.stats.gov.cn/tjsj/pcsj/rkpc/6rp/" + e.getKey();
+            httpUtil.download(fileUrl, "/root/Downloads/census2010/" + e.getKey());
+//            System.out.println(e.getKey() + ",    " + e.getValue());
         }
 
 //        for (Element e : h3List) {
